@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy[asyncio]
+asyncpg
+pytest
+pytest-asyncio
+pytest-bdd
+httpx
+urllib3
+pytest-mock
