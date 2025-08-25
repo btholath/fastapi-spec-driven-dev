@@ -12,6 +12,24 @@ pip uninstall langsmith langchain-core unstructured-client -y
 pip show pytest six urllib3
 
 
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev (main) $ lsof -i :8000
+COMMAND   PID      USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+uvicorn 17979 codespace    3u  IPv4 214181      0t0  TCP localhost:8000 (LISTEN)
+python3 23693 codespace    3u  IPv4 214181      0t0  TCP localhost:8000 (LISTEN)
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev (main) $ 
+
+kill -9 17979
+kill -9 23693
+lsof -i :8000
+
+
+
+docker-compose down  # Ensure no stale containers
+docker-compose up --build
+--Initialize the database
+python init_db.py
+
+
 # Run Your FastAPI Application
 (.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev (main) $ uvicorn app.main:app --reload
 INFO:     Will watch for changes in these directories: ['/workspaces/fastapi-spec-driven-dev']
@@ -20,6 +38,7 @@ INFO:     Started reloader process [17979] using StatReload
 INFO:     Started server process [17981]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+
 
 
 # Testing API
