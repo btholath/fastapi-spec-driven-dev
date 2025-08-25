@@ -3,7 +3,6 @@ from app.schemas.annuity import AnnuityCreate, AnnuityResponse
 from app.services.annuity import calculate_premium
 from app.dependencies import get_current_user, get_async_session, log_action
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 from app.models.annuity import Annuity
 
 app = FastAPI(title="FastAPI Spec-Driven Dev")

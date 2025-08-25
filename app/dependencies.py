@@ -8,10 +8,10 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     user = {"id": 123, "role": "user"}  # Mock auth
     if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
     return user
 
-engine = create_async_engine("postgresql+asyncpg://postgres:admin@192.168.144.1:5433/postgres")
+engine = create_async_engine("postgresql+asyncpg://postgres:admin@db:5432/postgres")
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
@@ -19,5 +19,4 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
         yield session
 
 async def log_action(message: str):
-    # Simulate async logging (e.g., to external service)
     print(f"Log: {message}")
