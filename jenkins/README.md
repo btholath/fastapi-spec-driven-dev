@@ -22,6 +22,8 @@ configuration-as-code:1.55
 EOF
 
 # Build and run Jenkins with Docker Compose
+cd /workspaces/fastapi-spec-driven-dev/jenkins
+source /workspaces/fastapi-spec-driven-dev/.venv/bin/activate
 docker-compose up -d --build
 
 Expected Output:
