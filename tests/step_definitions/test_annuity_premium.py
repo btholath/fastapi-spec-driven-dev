@@ -11,7 +11,7 @@ def logged_in_user():
     return {"id": 123, "role": "user"}
 
 @when('they submit an annuity request with principal $10000, term 5 years, and rate 3%')
-def submit_annuity_request():
+def submit_anuity_request():
     client = TestClient(app)
     client.headers["Authorization"] = "Bearer fake-token"
     response = client.post(

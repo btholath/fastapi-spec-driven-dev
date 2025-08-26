@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "/workspaces/fastapi-spec-driven-dev/.venv/bin/python",
+    "python.testing.pytestArgs": [
+        "tests",
+        "--asyncio-mode=auto"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
