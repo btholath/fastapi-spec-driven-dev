@@ -11,7 +11,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
     return user
 
-engine = create_async_engine("postgresql+asyncpg://postgres:admin@db:5432/postgres")
+def get_engine():
+    return create_async_engine("postgresql+asyncpg://postgres:admin@db:5432/postgres")
+
+engine = get_engine()
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:

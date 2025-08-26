@@ -128,3 +128,16 @@ INFO:     Application startup complete.
 
 (.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev (main) $ 
 
+
+
+Step 1: Fix Test Failure (socket.gaierror in test_create_annuity_happy_path)
+The socket.gaierror in the test occurs because the get_async_session dependency in app/dependencies.py tries to connect to postgresql+asyncpg://postgres:admin@db:5432/postgres from the Codespaces host, which cannot resolve the db hostname (defined in the Docker network). The test should fully mock the database session to avoid real database connections.
+Action:
+
+Update /workspaces/fastapi-spec-driven-dev/tests/unit/test_annuity.py to mock the Annuity object creation and database operations:
+
+Run the mock tests
+cd /workspaces/fastapi-spec-driven-dev
+source .venv/bin/activate
+export PYTHONPATH=/workspaces/fastapi-spec-driven-dev:$PYTHONPATH
+pytest -v tests/unit/test_annuity.py
