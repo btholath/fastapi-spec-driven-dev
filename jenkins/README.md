@@ -358,3 +358,64 @@ cd /workspaces/fastapi-spec-driven-dev/jenkins
 source /workspaces/fastapi-spec-driven-dev/.venv/bin/activate
 docker-compose down
 docker-compose up -d --build
+
+
+Build & run Jenkins
+
+From the directory with Dockerfile + docker-compose.yml:
+
+# Rebuild cleanly
+docker compose build --no-cache jenkins
+
+# Start detached
+docker compose up -d
+
+# Tail logs (first boot installs plugins)
+docker compose logs -f jenkins
+
+
+Open: http://localhost:8080
+
+Clean rebuild (including wiping data/plugins)
+docker compose down
+docker volume rm $(docker volume ls -q | grep jenkins_home)  # removes persisted Jenkins home
+docker compose up -d --build
+
+# Rebuild & start
+docker compose build --no-cache jenkins
+docker compose up -d
+docker compose logs -f jenkins
+
+
+# Check Plugin Availability
+curl -s https://updates.jenkins.io/current/update-center.actual.json | jq '.plugins["github-branch-source"].version'
+
+
+
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev/jenkins (main) $ git ls-remote https://github.com/btholath/fastapi-spec-driven-dev.git refs/heads/main
+bd2c604979600b07dd68dcd7a164483745c02be2        refs/heads/main
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev/jenkins (main) $ 
+
+
+
+# List of Plugins installed from Jenkins Plugin
+Timestamper
+Pipeline
+SSH Slaves
+OWASP Markup Formatter
+Workspace Cleanup
+Credentials Binding
+Pipeline Stage View
+Pipeline GitHub Groovy Libraries
+Gradle
+Subversion
+Email Extension
+Ant
+Matrix Authorization Strategy
+PAM Authentication
+LDAP
+Build Timeout
+GitHub Branch Source
+Mailer
+Git
+Folders

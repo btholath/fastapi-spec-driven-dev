@@ -1,23 +1,33 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:lts-jdk17
 
-# Switch to root to install dependencies
 USER root
 
-# Install Docker CLI and OpenJDK 17
-RUN apt-get update && apt-get install -y \
-    docker.io \
-    openjdk-17-jdk \
-    && rm -rf /var/lib/apt/lists/*
+# Base tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    gnupg \
+    git \
+ && rm -rf /var/lib/apt/lists/*
 
-# Install suggested plugins
+# Add Docker’s official apt repo and install docker-ce-cli
+RUN install -m 0755 -d /etc/apt/keyrings \
+ && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+ && chmod a+r /etc/apt/keyrings/docker.gpg \
+ && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+    $(. /etc/os-release && echo $VERSION_CODENAME) stable" > /etc/apt/sources.list.d/docker.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends docker-ce-cli \
+ && rm -rf /var/lib/apt/lists/*
+
+# Jenkins env
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false" \
+    JENKINS_UC="https://updates.jenkins.io" \
+    JENKINS_UC_EXPERIMENTAL="https://updates.jenkins.io/experimental"
+
+# Plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli --verbose --latest=false --plugin-file /usr/share/jenkins/ref/plugins.txt
 
-# Configure Jenkins to skip setup wizard
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
-
-# Expose Jenkins port
-EXPOSE 8080
-
-# Switch back to Jenkins user
+EXPOSE 8080 50000
 USER jenkins

@@ -1,12 +1,12 @@
 Create a Jenkins Pipeline Job:
 
 In Jenkins, click "New Item" > Name: fastapi-spec-driven-dev-pipeline > Select "Pipeline" > Click "OK."
-Under "General," check "GitHub project" and enter: https://github.com/btholath/fastapi-spec-driven-dev/.
+Under "General," check "GitHub project" and enter: https://github.com/btholath/fastapi-spec-driven-dev/
 Under "Pipeline," select:
 
 Definition: "Pipeline script"
 Script: Use the following Groovy script:
-groovypipeline {
+pipeline {
     agent any
     stages {
         stage('Checkout') {
