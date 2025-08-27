@@ -224,3 +224,137 @@ bashjava -version
 Click "Save" and "Build Now."
 Check "Console Output"
 -----------------------------------
+
+# check available plugin versions
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev/jenkins (main) $ curl -s https://updates.jenkins.io/download/plugins/github-authentication/ | grep -oP '\d+\.\d+\.\d+'
+curl -s https://updates.jenkins.io/download/plugins/allure/ | grep -oP '\d+\.\d+\.\d+'
+curl -s https://updates.jenkins.io/download/plugins/configuration-as-code/ | grep -oP '\d+\.\d+\.\d+'
+2.504.1
+2.504.1
+2.504.1
+2.504.1
+2.479.3
+2.479.3
+2.479.3
+2.479.3
+2.479.3
+2.479.1
+2.479.1
+2.479.1
+2.479.1
+2.479.1
+2.479.1
+2.479.1
+2.440.3
+2.440.3
+2.440.3
+2.426.3
+2.426.3
+2.426.3
+2.426.3
+2.414.3
+2.414.1
+2.414.1
+2.414.1
+2.414.1
+2.414.1
+2.414.1
+2.414.1
+2.414.1
+2.414.1
+2.387.3
+2.387.1
+2.387.1
+2.387.1
+2.361.4
+2.361.4
+2.361.4
+2.361.4
+2.319.3
+2.319.3
+2.289.3
+2.289.3
+2.289.3
+2.289.3
+2.289.3
+2.289.3
+2.289.3
+2.289.3
+2.289.3
+1.55.1
+1.55.1
+1.55.1
+2.249.1
+2.249.1
+1.54.1
+1.54.1
+1.54.1
+2.249.1
+2.249.1
+1.53.1
+1.53.1
+1.53.1
+2.249.1
+2.249.1
+2.249.1
+2.222.1
+2.222.1
+2.222.1
+1.47.1
+1.47.1
+1.47.1
+1.36.2
+1.36.2
+1.36.2
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+2.60.3
+3.2.1
+2.8.0
+7.4.0
+7.4.0
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev/jenkins (main) $ 
+
+
+# Rebuild and restart
+cd /workspaces/fastapi-spec-driven-dev/jenkins
+source /workspaces/fastapi-spec-driven-dev/.venv/bin/activate
+docker-compose down
+docker-compose up -d --build

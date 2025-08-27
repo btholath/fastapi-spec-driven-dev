@@ -1,0 +1,1 @@
+[{"uid":"ef57ee0a663c84b1","name":"test_create_annuity_happy_path","time":{"start":1756256554309,"stop":1756256554398,"duration":89},"status":"broken","severity":"normal"},{"uid":"d9fd18ee9c3fca73","name":"test_create_annuity_invalid_input","time":{"start":1756256555128,"stop":1756256555132,"duration":4},"status":"passed","severity":"normal"}]

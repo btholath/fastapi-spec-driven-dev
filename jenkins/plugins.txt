@@ -1,3 +1,5 @@
 git:5.2.1
 github:1.37.3
-configuration-as-code:1985.vdda_32d0c4ea_b_
+github-authentication:1.0.2
+configuration-as-code:2026.v2f7a_8fd2a_73e
+allure:2.31.0

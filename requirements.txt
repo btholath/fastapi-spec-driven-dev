@@ -9,4 +9,5 @@ pytest-bdd==7.2.0
 httpx==0.27.2
 pytest-mock==3.14.0
 six==1.16.0
-urllib3==1.26.20allure-pytest==2.15.0
+urllib3==1.26.20
+allure-pytest==2.15.0
