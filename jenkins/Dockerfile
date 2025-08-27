@@ -3,9 +3,10 @@ FROM jenkins/jenkins:lts
 # Switch to root to install dependencies
 USER root
 
-# Install Docker CLI for Codespaces compatibility
+# Install Docker CLI and OpenJDK 17
 RUN apt-get update && apt-get install -y \
     docker.io \
+    openjdk-17-jdk \
     && rm -rf /var/lib/apt/lists/*
 
 # Install suggested plugins

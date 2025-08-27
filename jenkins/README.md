@@ -172,3 +172,55 @@ For security, restrict the Codespace port visibility to "Private" or "Organizati
 If you need to customize Jenkins further, add a config.xml file or use the Configuration as Code plugin (configuration-as-code in plugins.txt).
 
 Would you like to integrate a specific GitHub repository with Jenkins or add additional configurations (e.g., pipeline setup)? Please share any specific requirements or errors you encounter during setup
+
+# Step 1: Install OpenJDK in Jenkins Container
+docker exec -u root jenkins-jenkins-1 apt-get update
+docker exec -u root jenkins-jenkins-1 apt-get install -y openjdk-17-jdk
+docker exec jenkins-jenkins-1 java -version
+
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev (main) $ docker exec jenkins-jenkins-1 find / -name 'java' 2>/dev/null
+/usr/bin/java
+/usr/lib/jvm/java-17-openjdk-amd64/bin/java
+/usr/share/java
+/opt/java
+/opt/java/openjdk/bin/java
+/var/lib/dpkg/alternatives/java
+/etc/alternatives/java
+/etc/ssl/certs/java
+/etc/apparmor.d/abstractions/ubuntu-browsers.d/java
+(.venv) @btholath ➜ /workspaces/fastapi-spec-driven-dev (main) $ 
+
+
+Step 2: Configure JDK in Jenkins
+Now that OpenJDK 17 is installed, configure it in the Jenkins UI.
+Action:
+
+Open the Jenkins UI at https://<codespace-id>-8080.githubpreview.dev.
+Log in with your admin credentials (e.g., username: admin, password: <your-password>).
+Go to "Manage Jenkins" > "Tools" (under "System Configuration").
+Scroll to the JDK section and click "Add JDK":
+
+Name: JDK17
+Install automatically: Uncheck (since we installed it manually).
+JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64 (adjust based on the find output above).
+
+Click "Save."
+
+
+--------------------------------
+Step 4: Verify JDK in Jenkins Job
+Create a test job to confirm the JDK configuration.
+Action:
+
+In Jenkins UI, click "New Item" > Name: test-jdk > Select "Freestyle project" > Click "OK."
+In the job configuration:
+
+Under "Build Steps," click "Add build step" > Select "Execute shell."
+Add:
+bashjava -version
+
+
+
+Click "Save" and "Build Now."
+Check "Console Output"
+-----------------------------------
