@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     gnupg \
     git \
+    python3-venv \
+    python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
 # Add Docker’s official apt repo and install docker-ce-cli
